@@ -3,9 +3,8 @@
 var gereji = require("./lib/gereji.js");
 var fs = require("fs");
 var url = require("url");
-var settings = require("./settings.json");
 var storage = require('gereji-storage');
-
+var settings;
 var self = {
 	respond: function(request, response){
 		var context = new (require('gereji-context'));
@@ -35,12 +34,18 @@ var self = {
 	}
 };
 
-storage.db(settings.database).open(function(error, db){
-	if(error)
-		return console.log(error.toString());
- 	storage.set("global", db);
-	if(settings.server.secure)
-		require('https').createServer(self.cert(settings), self.respond).listen(settings.server.port, settings.server.host);
-	else
-		require('http').createServer(self.respond).listen(settings.server.port, settings.server.host);
-});
+module.exports = {
+	listen: function(){
+		settings = arguments[0];
+		console.log(settings.path);
+		storage.db(settings.database).open(function(error, db){
+			if(error)
+				return console.log(error.toString());
+			storage.set("global", db);
+			if(settings.server.secure)
+				require('https').createServer(self.cert(settings), self.respond).listen(settings.server.port, settings.server.host);
+			else
+				require('http').createServer(self.respond).listen(settings.server.port, settings.server.host);
+		});
+	}
+};
