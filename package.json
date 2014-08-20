@@ -1,0 +1,37 @@
+{
+	"name": "gereji",
+		"version": "0.0.1",
+		"description": "A non-restrictive web application framework for creating multi-site web applications focused on security and performance.",
+		"main": "index.js",
+		"scripts": {
+		"test": "mocha"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dnjuguna/gereji.git"
+	},
+	"keywords": [
+		"routing",
+		"authentication",
+		"xslt",
+		"multi-site",
+		"oauth",
+		"orm",
+		"json",
+		"xml",
+		"mongodb",
+		"security",
+		"domains",
+		"vhosts",
+		"caching"
+	],
+    "dependencies" : {
+        "gereji-context" : ">= 0.0.3"
+    },
+	"author": "David Njuguna <dnjuguna@gmail.com> (https://github.com/dnjuguna)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/dnjuguna/gereji/issues"
+	},
+	"homepage": "https://github.com/dnjuguna/gereji"
+}
