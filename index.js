@@ -4,6 +4,7 @@ var gereji = require("./lib/gereji.js");
 var fs = require("fs");
 var url = require("url");
 var settings = require("./settings.json");
+var storage = require('gereji-storage');
 
 var self = {
 	respond: function(request, response){
@@ -37,7 +38,6 @@ var self = {
 	}
 };
 
-var storage = require('gereji-storage');
 
 storage.db(settings.database).open(function(error, db){
 	if(error)
