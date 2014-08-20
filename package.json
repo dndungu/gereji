@@ -1,6 +1,6 @@
 {
 	"name": "gereji",
-		"version": "0.0.5",
+		"version": "0.0.6",
 		"description": "A non-restrictive web application framework for creating multi-site web applications focused on security and performance.",
 		"main": "index.js",
 		"scripts": {
@@ -26,7 +26,7 @@
 		"caching"
 	],
     "dependencies" : {
-        "gereji-context" : ">= 0.0.6",
+        "gereji-context" : ">= 0.0.8",
         "gereji-broker" : ">= 0.0.2",
         "gereji-cookies" : ">= 0.0.2",
         "gereji-encryption" : ">= 0.0.2",
