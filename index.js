@@ -37,7 +37,6 @@ var self = {
 module.exports = {
 	listen: function(){
 		settings = arguments[0];
-		console.log(settings.path);
 		storage.db(settings.database).open(function(error, db){
 			if(error)
 				return console.log(error.toString());
