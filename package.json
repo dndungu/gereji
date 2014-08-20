@@ -1,6 +1,6 @@
 {
 	"name": "gereji",
-		"version": "0.0.1",
+		"version": "0.0.2",
 		"description": "A non-restrictive web application framework for creating multi-site web applications focused on security and performance.",
 		"main": "index.js",
 		"scripts": {
@@ -26,7 +26,12 @@
 		"caching"
 	],
     "dependencies" : {
-        "gereji-context" : ">= 0.0.3"
+        "gereji-context" : ">= 0.0.4",
+        "gereji-broker" : ">= 0.0.2",
+        "gereji-cookies" : ">= 0.0.2",
+        "gereji-encryption" : ">= 0.0.2",
+        "gereji-storage" : ">= 0.0.2",
+        "gereji-translator" : ">= 0.0.2"
     },
 	"author": "David Njuguna <dnjuguna@gmail.com> (https://github.com/dnjuguna)",
 	"license": "MIT",
