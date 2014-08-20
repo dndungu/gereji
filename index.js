@@ -3,7 +3,7 @@
 var gereji = require("./lib/gereji.js");
 var fs = require("fs");
 var url = require("url");
-var settings = require("./settings.js");
+var settings = require("./settings.json");
 
 var self = {
 	respond: function(request, response){

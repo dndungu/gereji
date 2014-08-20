@@ -1,6 +1,6 @@
 {
 	"name": "gereji",
-		"version": "0.0.2",
+		"version": "0.0.3",
 		"description": "A non-restrictive web application framework for creating multi-site web applications focused on security and performance.",
 		"main": "index.js",
 		"scripts": {
