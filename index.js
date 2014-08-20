@@ -20,15 +20,12 @@ var self = {
         context.set("uri", url_parts.pathname);
 		context.set("query", url_parts.query);
         context.set("storage", storage);
-		this.boot(context);
-		context.get('broker').emit({type : 'server.end', data : context});
-	},
-	boot: function(){
 		gereji.router.init(context);
 		gereji.authenticator.init(context);
 		gereji.cache.init(context);
 		gereji.operator.init(context);
 		gereji.publisher.init(context);
+		context.get('broker').emit({type : 'server.end', data : context});
 	},
 	cert: function(){
 		return {
@@ -37,7 +34,6 @@ var self = {
 		};
 	}
 };
-
 
 storage.db(settings.database).open(function(error, db){
 	if(error)
