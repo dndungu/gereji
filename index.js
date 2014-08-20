@@ -8,7 +8,7 @@ var settings = require("./settings.json");
 var self = {
 	respond: function(request, response){
 		var context = new (require('gereji-context'));
-		context.init();
+		context.init(settings);
 		context.get("cookies").parseCookie(request.headers['cookie']);
         context.set("request", request);
         context.set("response", response);
