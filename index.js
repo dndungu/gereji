@@ -7,8 +7,7 @@ var storage = require('gereji-storage');
 var settings;
 var self = {
 	respond: function(request, response){
-		var context = new (require('gereji-context'));
-		context.init(settings);
+		var context = self.context();
 		context.get("cookies").parseCookie(request.headers['cookie']);
         context.set("request", request);
         context.set("response", response);
@@ -33,18 +32,21 @@ var self = {
 	},
 	context: function(){
 		var context = new (require('gereji-context'));
+		context.init(settings);
 		context.set("settings", settings);
 		context.set("cookies", (new (require('gereji-cookies'))));
 		var broker = new (require('gereji-broker'));
-		broker.on("log", function(severity, message){
-			context.log(severity, message);
-		});
+		broker.init();
+		broker.log = context.log;
 		context.set("broker", broker);
 		context.set("user", (new (require('gereji-user'))));
 		var encryption = new (require('gereji-encryption'));
-		encryption.init(this.get("settings").key);
+		encryption.init(context.get("settings").key);
 		context.set("encryption", encryption);
-		return this;
+		var publisher = new (require('gereji-publisher'));
+		publisher.init();
+		context.set('publisher', publisher);
+		return context;
 	}
 };
 
