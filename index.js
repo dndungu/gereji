@@ -14,7 +14,7 @@ var self = {
         context.set("response", response);
 		var host = request.headers.host ? request.headers.host.split(':')[0] : settings.server.host;
         context.set("host", host);
-        context.set("method", request.method);
+        context.set("method", request.method.toLowerCase());
 		var url_parts = url.parse(request.url.trim(), true, true);
         context.set("uri", url_parts.pathname);
 		context.set("query", url_parts.query);
@@ -23,7 +23,6 @@ var self = {
 		gereji.authenticator.init(context);
 		gereji.cache.init(context);
 		gereji.operator.init(context);
-		gereji.publisher.init(context);
 		context.get('broker').emit({type : 'server.end', data : context});
 	},
 	cert: function(){
@@ -31,6 +30,21 @@ var self = {
 			key: fs.readFileSync(settings.server.key, 'utf8'),
 			cert: fs.readFileSync(settings.server.cert, 'utf8')
 		};
+	},
+	context: function(){
+		var context = new (require('gereji-context'));
+		context.set("settings", settings);
+		context.set("cookies", (new (require('gereji-cookies'))));
+		var broker = new (require('gereji-broker'));
+		broker.on("log", function(severity, message){
+			context.log(severity, message);
+		});
+		context.set("broker", broker);
+		context.set("user", (new (require('gereji-user'))));
+		var encryption = new (require('gereji-encryption'));
+		encryption.init(this.get("settings").key);
+		context.set("encryption", encryption);
+		return this;
 	}
 };
 
