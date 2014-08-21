@@ -31,21 +31,18 @@ var self = {
 		};
 	},
 	context: function(){
-		var context = new (require('gereji-context'));
+		var context = new (require(__dirname, '/lib/utilities/gereji-context'));
+		var encryption = new (require(__dirname, '/lib/utilities/gereji-encryption'));
+		var broker = new (require(__dirname, '/lib/utilities/gereji-broker'));
+		var publisher = new (require(__dirname, '/lib/utilities/gereji-publisher'));
+		context.set("cookies", (new (require(__dirname, '/lib/utilities/gereji-cookies'))));
+		context.set("user", (new (require(__dirname, '/lib/utilities/gereji-user'))));
 		context.init(settings);
 		context.set("settings", settings);
-		context.set("cookies", (new (require('gereji-cookies'))));
-		var broker = new (require('gereji-broker'));
-		broker.init();
+		context.set("encryption", encryption.init(context.get("settings").key));
 		broker.log = context.log;
-		context.set("broker", broker);
-		context.set("user", (new (require('gereji-user'))));
-		var encryption = new (require('gereji-encryption'));
-		encryption.init(context.get("settings").key);
-		context.set("encryption", encryption);
-		var publisher = new (require('gereji-publisher'));
-		publisher.init();
-		context.set('publisher', publisher);
+		context.set("broker", broker.init());
+		context.set('publisher', publisher.init());
 		return context;
 	}
 };
