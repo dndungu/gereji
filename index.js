@@ -3,7 +3,7 @@
 var gereji = require(__dirname + "/lib/gereji.js");
 var fs = require("fs");
 var url = require("url");
-var storage = require(__dirname + '/lib/utilities/storage.js');
+var storage = require('gereji-storage');
 var settings;
 var self = {
 	respond: function(request, response){
@@ -31,13 +31,15 @@ var self = {
 		};
 	},
 	context: function(){
-		var context = new (require(__dirname + '/lib/utilities/context.js'));
+		var context = new (require('gereji-context'));
 		context.init(settings);
-		var encryption = new (require(__dirname + '/lib/utilities/encryption.js'));
-		var broker = new (require(__dirname + '/lib/utilities/broker.js'));
-		var publisher = new (require(__dirname + '/lib/utilities/publisher.js'));
-		context.set("cookies", (new (require(__dirname + '/lib/utilities/cookies.js'))));
-		context.set("user", (new (require(__dirname + '/lib/utilities/user.js'))));
+		var encryption = new (require('gereji-encryption'));
+		var broker = new (require('gereji-broker'));
+		var publisher = new (require('gereji-publisher'));
+		context.set("cookies", (new (require('gereji-cookies'))));
+		context.set("user", (new (require('gereji-user'))));
+		context.set("user", (new (require('gereji-user'))));
+		context.set("user", (new (require('gereji-user'))));
 		context.set("settings", settings);
 		context.set("encryption", encryption.init(context.get("settings").key));
 		broker.log = context.log;
