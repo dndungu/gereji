@@ -37,9 +37,8 @@ var self = {
 		var broker = new (require('gereji-broker'));
 		var publisher = new (require('gereji-publisher'));
 		context.set("cookies", (new (require('gereji-cookies'))));
-		context.set("user", (new (require('gereji-user'))));
-		context.set("user", (new (require('gereji-user'))));
-		context.set("user", (new (require('gereji-user'))));
+		var user = require('gereji-user');
+		context.set("user", (new user.user));
 		context.set("settings", settings);
 		context.set("encryption", encryption.init(context.get("settings").key));
 		broker.log = context.log;
